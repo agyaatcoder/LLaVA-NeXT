@@ -1,21 +1,28 @@
 import os
+# llava/model/__init__.py
 
-AVAILABLE_MODELS = {
-    "llava_llama": "LlavaLlamaForCausalLM, LlavaConfig",
-    "llava_gemma": "LlavaGemmaForCausalLM, LlavaGemmaConfig",
-    "llava_qwen": "LlavaQwenForCausalLM, LlavaQwenConfig",
-    # "llava_qwen_moe": "LlavaQwenMoeForCausalLM, LlavaQwenMoeConfig",
-    "llava_mistral": "LlavaMistralForCausalLM, LlavaMistralConfig",
-    "llava_mixtral": "LlavaMixtralForCausalLM, LlavaMixtralConfig",
-    # Add other models as needed
-}
+# Import classes from language_model
+try:
+    from llava.model.language_model.llava_llama import LlavaLlamaForCausalLM, LlavaConfig
+except ImportError as e:
+    print(f"Failed to import LlavaLlamaForCausalLM, LlavaConfig: {e}")
 
-for model_name, model_classes in AVAILABLE_MODELS.items():
-    try:
-        exec(f"from .language_model.{model_name} import {model_classes}")
-    except ImportError:
-        import traceback
+try:
+    from llava.model.language_model.llava_gemma import LlavaGemmaForCausalLM, LlavaGemmaConfig
+except ImportError as e:
+    print(f"Failed to import LlavaGemmaForCausalLM, LlavaGemmaConfig: {e}")
 
-        traceback.print_exc()
-        print(f"Failed to import {model_name} from llava.language_model.{model_name}")
-        pass
+try:
+    from llava.model.language_model.llava_qwen import LlavaQwenForCausalLM, LlavaQwenConfig
+except ImportError as e:
+    print(f"Failed to import LlavaQwenForCausalLM, LlavaQwenConfig: {e}")
+
+try:
+    from llava.model.language_model.llava_mistral import LlavaMistralForCausalLM, LlavaMistralConfig
+except ImportError as e:
+    print(f"Failed to import LlavaMistralForCausalLM, LlavaMistralConfig: {e}")
+
+try:
+    from llava.model.language_model.llava_mixtral import LlavaMixtralForCausalLM, LlavaMixtralConfig
+except ImportError as e:
+    print(f"Failed to import LlavaMixtralForCausalLM, LlavaMixtralConfig: {e}")
